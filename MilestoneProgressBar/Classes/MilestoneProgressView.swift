@@ -9,19 +9,19 @@ import UIKit
 
 public class Milestone {
     
-    var progress: Float!
-    var image: UIImage!
-    var shouldLightUp: Bool!
-    var lightUpColor: UIColor?
+    public var progress: Float!
+    public var image: UIImage!
+    public var shouldLightUp: Bool!
+    public var lightUpColor: UIColor?
     
-    init(milestoneProgess: Float!, milestoneImage: UIImage!, milestoneShouldLightUp: Bool!, milestoneLightUpColor: UIColor?) {
+    public init(milestoneProgess: Float!, milestoneImage: UIImage!, milestoneShouldLightUp: Bool!, milestoneLightUpColor: UIColor?) {
         progress = milestoneProgess
         image = milestoneImage
         shouldLightUp = milestoneShouldLightUp
         lightUpColor = milestoneLightUpColor
     }
     
-    enum MilestoneSize {
+    public enum MilestoneSize {
         case Small
         case Medium
         case Large
@@ -40,21 +40,33 @@ public class Milestone {
 
 public class MilestoneProgressBar: UIProgressView {
     
-    var milestones: [Milestone]! = []
-    var barHeight:CGFloat = 1.0 {
+    public var milestones: [Milestone]! = []
+    public var barHeight:CGFloat = 1.0 {
+        didSet {
+            sizeToFit()
+            updateBar()
+        }
+    }
+    public var barWidth:CGFloat = 1.0 {
         didSet {
             sizeToFit()
             updateBar()
         }
     }
     
+    public var barSize:CGSize! {
+        didSet {
+            barHeight = barSize.height
+            barWidth = barSize.width
+        }
+    }
     
-    var milestoneSize: Milestone.MilestoneSize = .Medium {
+    public var milestoneSize: Milestone.MilestoneSize = .Medium {
         didSet {
             updateBar()
         }
     }
-    var defaultMilestoneLightUpColor: UIColor = UIColor.grayColor()
+    public var defaultMilestoneLightUpColor: UIColor = UIColor.grayColor()
     
     override public func setProgress(progress: Float, animated: Bool) {
         //Remove all milestones(milestones may have changed)
@@ -70,7 +82,7 @@ public class MilestoneProgressBar: UIProgressView {
                 if milestoneImage == nil {
                     milestoneImage = UIImage()
                 }
-                let imageViewSideLength = frame.width/milestoneSize.milestoneSideLengthScaleForSize
+                let imageViewSideLength = barWidth/milestoneSize.milestoneSideLengthScaleForSize
                 let imageViewX = (frame.width) * CGFloat(milestone.progress) + frame.origin.x - imageViewSideLength/2
                 let imageViewY = frame.origin.y + barHeight/2 - imageViewSideLength/2
                 let imageView = UIImageView(frame: CGRect(x: imageViewX, y: imageViewY, width: imageViewSideLength, height: imageViewSideLength))
@@ -89,7 +101,7 @@ public class MilestoneProgressBar: UIProgressView {
     }
     
     //Returns if adding the milestone was successful
-    func addMilestone(newMilestone: Milestone?) -> Bool {
+    public func addMilestone(newMilestone: Milestone?) -> Bool {
         if newMilestone != nil {
             milestones.append(newMilestone!)
             milestones.sortInPlace{$0.progress <= $1.progress}
@@ -100,31 +112,49 @@ public class MilestoneProgressBar: UIProgressView {
     }
     
     //Returns if adding the milestone was successful
-    func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!, lightUpColor:UIColor?) -> Bool {
+    public func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!, lightUpColor:UIColor?) -> Bool {
         return addMilestone(Milestone(milestoneProgess: progress, milestoneImage: image, milestoneShouldLightUp: shouldLightUp, milestoneLightUpColor:lightUpColor))
     }
     
     //Returns if adding the milestone was successful, assumes lightUpColor is nil
-    func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!) -> Bool {
+    public func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!) -> Bool {
         return addMilestoneWith(progress, image: image, shouldLightUp: shouldLightUp, lightUpColor: nil)
     }
     
     //Returns if adding the milestone was successful, assumes shouldLightUp is false
-    func addMilestoneWith(progress:Float!, image:UIImage!) -> Bool {
+    public func addMilestoneWith(progress:Float!, image:UIImage!) -> Bool {
         return addMilestoneWith(progress, image: image, shouldLightUp: false)
     }
     
     override public func sizeThatFits(size: CGSize) -> CGSize {
-        let newSize = CGSizeMake(frame.size.width,barHeight);
+        let newSize = CGSizeMake(barWidth,barHeight);
         return newSize;
     }
     
-    func removeAllMilestones() {
+    public func removeAllMilestones() {
         milestones.removeAll()
         updateBar()
     }
     
     private func updateBar() {
         setProgress(progress, animated: false)
+        layer.cornerRadius = barHeight * (3/6)
+        layer.masksToBounds = true
+        clipsToBounds = true
+    }
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        updateBar()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        updateBar()
+    }
+    
+    public override func didMoveToSuperview() {
+        sizeToFit()
+        updateBar()
     }
 }
