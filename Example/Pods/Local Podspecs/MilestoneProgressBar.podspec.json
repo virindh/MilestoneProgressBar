@@ -1,0 +1,22 @@
+{
+  "name": "MilestoneProgressBar",
+  "version": "0.1.0",
+  "summary": "A short description of MilestoneProgressBar.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/MilestoneProgressBar",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Virindh Borra": "borra.virindh@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/MilestoneProgressBar.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MilestoneProgressBar/Classes/**/*"
+}

@@ -22,7 +22,7 @@ pod "MilestoneProgressBar"
 
 ## Author
 
-Virindh Borra, borra.virindh@gmail.com
+Virindh Borra, me@virindhborra.com
 
 ## License
 

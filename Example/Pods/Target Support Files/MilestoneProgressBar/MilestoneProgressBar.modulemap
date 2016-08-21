@@ -1,0 +1,6 @@
+framework module MilestoneProgressBar {
+  umbrella header "MilestoneProgressBar-umbrella.h"
+
+  export *
+  module * { export * }
+}

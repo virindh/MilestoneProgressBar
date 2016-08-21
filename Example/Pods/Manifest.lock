@@ -1,0 +1,16 @@
+PODS:
+  - MilestoneProgressBar (0.1.0)
+
+DEPENDENCIES:
+  - MilestoneProgressBar (from `../`)
+
+EXTERNAL SOURCES:
+  MilestoneProgressBar:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MilestoneProgressBar: 8fd0805fdca5e0ee9ebeafc75f7f0d272343dabb
+
+PODFILE CHECKSUM: a20856f565a8807b64837fecf7a30e634770c299
+
+COCOAPODS: 1.0.1
