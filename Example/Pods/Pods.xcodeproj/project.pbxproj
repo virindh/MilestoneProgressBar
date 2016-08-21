@@ -12,8 +12,8 @@
 		99FFA9234EA11676650B7759D031EE5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		A602DB1F0E7136C78E87D0AB22DB26A1 /* MilestoneProgressBar-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29982ECA33BC0B6303EC67342FE06ED2 /* MilestoneProgressBar-dummy.m */; };
 		C522FF7C22889D656AFCE93CB9F283D2 /* Pods-MilestoneProgressBar_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA98EB740A864577CBE200FC1A54C341 /* Pods-MilestoneProgressBar_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D159A4F80B36D7CF2123947CAAAF5291 /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EA1CFF87D93FC19755A2A986250BF9 /* ReplaceMe.swift */; };
 		E1E3ECD4FAB32D098BA5430BA35BE0DE /* Pods-MilestoneProgressBar_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 38B2A4C6A6559327852BA9424259E548 /* Pods-MilestoneProgressBar_Tests-dummy.m */; };
+		E7443B2F1D6A147F00C2CABC /* MilestoneProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7443B2E1D6A147F00C2CABC /* MilestoneProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,6 @@
 		0D20C6A765FDB959C70A71C47A72B8C8 /* MilestoneProgressBar-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MilestoneProgressBar-prefix.pch"; sourceTree = "<group>"; };
 		29982ECA33BC0B6303EC67342FE06ED2 /* MilestoneProgressBar-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MilestoneProgressBar-dummy.m"; sourceTree = "<group>"; };
 		2A0A0DED2137658D7BF59A1E3F644776 /* Pods-MilestoneProgressBar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MilestoneProgressBar_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		30EA1CFF87D93FC19755A2A986250BF9 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
 		38B2A4C6A6559327852BA9424259E548 /* Pods-MilestoneProgressBar_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MilestoneProgressBar_Tests-dummy.m"; sourceTree = "<group>"; };
 		421FB6FC71C022FEAE72CBF9F07DD4AF /* MilestoneProgressBar.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = MilestoneProgressBar.modulemap; sourceTree = "<group>"; };
 		42F81384C3876E78E728AACC2EF226AA /* MilestoneProgressBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MilestoneProgressBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +45,7 @@
 		BA98EB740A864577CBE200FC1A54C341 /* Pods-MilestoneProgressBar_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MilestoneProgressBar_Tests-umbrella.h"; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D1176333EE6AF117FC71CFCCE49B22DC /* Pods-MilestoneProgressBar_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MilestoneProgressBar_Tests-resources.sh"; sourceTree = "<group>"; };
+		E7443B2E1D6A147F00C2CABC /* MilestoneProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestoneProgressView.swift; sourceTree = "<group>"; };
 		F5989704E9F6C0034B3E002DB7BFBD29 /* Pods_MilestoneProgressBar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneProgressBar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88C58F0BE2AFFCE07150E5EAD0C85BC /* Pods-MilestoneProgressBar_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MilestoneProgressBar_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,7 +114,7 @@
 		89DCA9BEF383058DDB87BE84DC3F1651 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				30EA1CFF87D93FC19755A2A986250BF9 /* ReplaceMe.swift */,
+				E7443B2E1D6A147F00C2CABC /* MilestoneProgressView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -269,8 +269,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7443B2F1D6A147F00C2CABC /* MilestoneProgressView.swift in Sources */,
 				A602DB1F0E7136C78E87D0AB22DB26A1 /* MilestoneProgressBar-dummy.m in Sources */,
-				D159A4F80B36D7CF2123947CAAAF5291 /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,9 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = 'MilestoneProgressBar is a UIProgressView subclass that allows you to add milestones. Milestones are images displayed along the way of the bar. Milestones can be light up optionally.' <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'MilestoneProgressBar is a UIProgressView subclass that allows you to add milestones. Milestones are images displayed along the way of the bar. Milestones can be light up optionally.' 
 
   s.homepage         = 'https://github.com/virindh/MilestoneProgressBar'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
