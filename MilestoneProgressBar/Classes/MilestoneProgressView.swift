@@ -1,6 +1,5 @@
 //
-//  MilestoneProgressView.swift
-//  MilestoneProgressBar
+//  MilestoneProgressBar.swift
 //
 //  Created by Virindh Borra on 8/20/16.
 //  Copyright © 2016 Virindh Borra. All rights reserved.
@@ -8,7 +7,7 @@
 
 import UIKit
 
-class Milestone {
+public class Milestone {
     
     var progress: Float!
     var image: UIImage!
@@ -39,7 +38,7 @@ class Milestone {
     }
 }
 
-class MilestoneProgressView: UIProgressView {
+public class MilestoneProgressBar: UIProgressView {
     
     var milestones: [Milestone]! = []
     var barHeight:CGFloat = 1.0 {
@@ -57,7 +56,7 @@ class MilestoneProgressView: UIProgressView {
     }
     var defaultMilestoneLightUpColor: UIColor = UIColor.grayColor()
     
-    override func setProgress(progress: Float, animated: Bool) {
+    override public func setProgress(progress: Float, animated: Bool) {
         //Remove all milestones(milestones may have changed)
         superview?.subviews.forEach {
             if ($0 is UIImageView && $0.restorationIdentifier == "Milestone Image") {
@@ -77,7 +76,7 @@ class MilestoneProgressView: UIProgressView {
                 let imageView = UIImageView(frame: CGRect(x: imageViewX, y: imageViewY, width: imageViewSideLength, height: imageViewSideLength))
                 imageView.image = milestoneImage
                 imageView.contentMode = .ScaleAspectFit
-                imageView.restorationIdentifier = "Milestone Image" //Needed: a better way to identify idividual imageviews that were added by MilestoneProgressView
+                imageView.restorationIdentifier = "Milestone Image" //Needed: a better way to identify idividual imageviews that were added by MilestoneProgressBar
                 if milestone.progress <= progress && milestone.shouldLightUp {
                     //This milestone should be lit up(tinted)
                     imageView.image = imageView.image?.imageWithRenderingMode(.AlwaysTemplate)
@@ -88,7 +87,7 @@ class MilestoneProgressView: UIProgressView {
         }
         super.setProgress(progress, animated: true)
     }
-
+    
     //Returns if adding the milestone was successful
     func addMilestone(newMilestone: Milestone?) -> Bool {
         if newMilestone != nil {
@@ -115,7 +114,7 @@ class MilestoneProgressView: UIProgressView {
         return addMilestoneWith(progress, image: image, shouldLightUp: false)
     }
     
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override public func sizeThatFits(size: CGSize) -> CGSize {
         let newSize = CGSizeMake(frame.size.width,barHeight);
         return newSize;
     }
