@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MilestoneProgressBar'
-  s.version          = '1.0.3'
+  s.version          = '1.0.5'
   s.summary          = 'MilestoneProgressBar is a UIProgressView subclass that allows you to add milestones'
 
 # This description is used to generate tags and improve search results.

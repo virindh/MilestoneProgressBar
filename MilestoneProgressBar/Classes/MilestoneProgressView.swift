@@ -13,12 +13,13 @@ public class Milestone {
     public var image: UIImage!
     public var shouldLightUp: Bool!
     public var lightUpColor: UIColor?
-    
-    public init(milestoneProgess: Float!, milestoneImage: UIImage!, milestoneShouldLightUp: Bool!, milestoneLightUpColor: UIColor?) {
+    public var lightUpImage:UIImage?
+    public init(milestoneProgess: Float!, milestoneImage: UIImage!, milestoneShouldLightUp: Bool!, milestoneLightUpColor: UIColor?, milestoneLightUpImage:UIImage?) {
         progress = milestoneProgess
         image = milestoneImage
         shouldLightUp = milestoneShouldLightUp
         lightUpColor = milestoneLightUpColor
+        lightUpImage = milestoneLightUpImage
     }
     
     public enum MilestoneSize {
@@ -30,7 +31,7 @@ public class Milestone {
             case .Small:
                 return 20.0
             case .Medium:
-                return 10.0
+                return 8.0
             case .Large:
                 return 5.0
             }
@@ -71,7 +72,7 @@ public class MilestoneProgressBar: UIProgressView {
     override public func setProgress(progress: Float, animated: Bool) {
         //Remove all milestones(milestones may have changed)
         superview?.subviews.forEach {
-            if ($0 is UIImageView && $0.restorationIdentifier == "Milestone Image") {
+            if ($0.restorationIdentifier == "Milestone Image") {
                 $0.removeFromSuperview()
             }
         }
@@ -86,15 +87,19 @@ public class MilestoneProgressBar: UIProgressView {
                 let imageViewX = (frame.width) * CGFloat(milestone.progress) + frame.origin.x - imageViewSideLength/2
                 let imageViewY = frame.origin.y + barHeight/2 - imageViewSideLength/2
                 let imageView = UIImageView(frame: CGRect(x: imageViewX, y: imageViewY, width: imageViewSideLength, height: imageViewSideLength))
+                
                 imageView.image = milestoneImage
                 imageView.contentMode = .ScaleAspectFit
                 imageView.restorationIdentifier = "Milestone Image" //Needed: a better way to identify idividual imageviews that were added by MilestoneProgressBar
-                if milestone.progress <= progress && milestone.shouldLightUp {
+                
+                imageView.image = (milestone.progress <= progress && milestone.shouldLightUp) ? (milestone.lightUpImage ?? milestone.image) : milestone.image //Sets the image to the light up image if it exists
+                if milestone.progress <= progress && milestone.shouldLightUp && milestone.lightUpColor != nil {
                     //This milestone should be lit up(tinted)
                     imageView.image = imageView.image?.imageWithRenderingMode(.AlwaysTemplate)
-                    imageView.tintColor = milestone.lightUpColor ?? defaultMilestoneLightUpColor
+                    imageView.tintColor = milestone.lightUpColor
                 }
                 superview?.insertSubview(imageView, aboveSubview: self)
+                
             }
         }
         super.setProgress(progress, animated: true)
@@ -112,8 +117,13 @@ public class MilestoneProgressBar: UIProgressView {
     }
     
     //Returns if adding the milestone was successful
+    public func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!, lightUpColor:UIColor?, lightUpImage:UIImage?) -> Bool {
+        return addMilestone(Milestone(milestoneProgess: progress, milestoneImage: image, milestoneShouldLightUp: shouldLightUp, milestoneLightUpColor:lightUpColor, milestoneLightUpImage: lightUpImage))
+    }
+    
+    //Returns if adding the milestone was successful, assumes lightUpImage is nil
     public func addMilestoneWith(progress:Float!, image:UIImage!, shouldLightUp:Bool!, lightUpColor:UIColor?) -> Bool {
-        return addMilestone(Milestone(milestoneProgess: progress, milestoneImage: image, milestoneShouldLightUp: shouldLightUp, milestoneLightUpColor:lightUpColor))
+        return addMilestoneWith(progress, image: image, shouldLightUp: shouldLightUp, lightUpColor: lightUpColor, lightUpImage: nil)
     }
     
     //Returns if adding the milestone was successful, assumes lightUpColor is nil
